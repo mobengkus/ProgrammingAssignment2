@@ -7,18 +7,19 @@
 
 ##this function creates a list that contains a function used to create a special kind of matrix that can cache its inverse
 
+
 makeCacheMatrix <- function(x = matrix()){
-  n <- NULL
-  set <<- function (z){
-    x<<- z
-    n<<- NULL
-  }
-  get<-funtion()x
-  setinverse <-function(inverse)n <<-inverse
-  getinverse <- function()n
-  list(set=set, get = get, 
+ n <- NULL
+ set<<- function (z){
+   x <<- z
+   n <<- NULL
+ }
+ get<-function()x
+ setinverse <- function(inverse)n <<- inverse
+ getinverse <- function()n
+ list(set=set, get=get,
        setinverse=setinverse, getinverse=getinverse)
-}
+ }
 
 
 ## Write a short comment describing this function
@@ -33,9 +34,8 @@ cacheSolve <- function(x, ...) {
     message("getting cached data")
     return(n)
   }
-  mat<-x$get()
-  n<-solve(mat,...)
+  mat <- x$get()
+  n <- solve(mat,...)
   x$setinverse(n)
   n
 }
-
