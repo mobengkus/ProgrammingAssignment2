@@ -7,18 +7,33 @@
 
 ##this function creates a list that contains a function used to create a special kind of matrix that can cache its inverse
 
+
 makeCacheMatrix <- function(x = matrix()){
-  n <- NULL
-  set <<- function (z){
-    x<<- z
-    n<<- NULL
-  }
-  get<-funtion()x
-  setinverse <-function(inverse)n <<-inverse
-  getinverse <- function()n
-  list(set=set, get = get, 
+  
+  ##setting the cache value to NULL
+ n <- NULL
+ 
+ ##
+ 
+ set<<- function (z){
+   x <<- z
+   
+   ##assigning environment n NULL
+   n <<- NULL
+ }
+ 
+ #getting x from environment
+ get<-function()x
+ 
+ setinverse <- function(inverse)n <<- inverse
+ 
+ ##getting the solve function
+ getinverse <- function()n
+ 
+ ## generating cache list for special matrix
+ list(set=set, get=get,
        setinverse=setinverse, getinverse=getinverse)
-}
+ }
 
 
 ## Write a short comment describing this function
@@ -27,15 +42,31 @@ makeCacheMatrix <- function(x = matrix()){
 ##if the inverse is already calculated, the inverse is returned from the cache
 
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
+  
+  ## Return a
   n <- x$getinverse()
+  
+  ##checking if the cache value is present
   if(!is.null(n)){
+    
+    ##setting message for when cache data is found
     message("getting cached data")
+    
+    ##setting to return cached value
     return(n)
   }
-  mat<-x$get()
-  n<-solve(mat,...)
+  
+  ##if cache data not found, retrieving original data
+  mat <- x$get()
+  
+  ##solving for the inverse matrix
+  n <- solve(mat,...)
+  
+  ##cache the solved inverse matrix
   x$setinverse(n)
+  
+  ##return the solved data
   n
 }
+
 
